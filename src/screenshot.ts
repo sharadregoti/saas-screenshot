@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ScreenshotRequest, ScreenshotResponse } from './types';
 
-const SCREENSHOTS_DIR = path.join(process.cwd(), 'screenshots');
+const SCREENSHOTS_DIR = path.join(__dirname, '..', 'screenshots');
 
 const USERNAME_SELECTORS = [
   'input[type=email]',

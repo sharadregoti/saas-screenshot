@@ -63,6 +63,36 @@ curl -X POST http://localhost:3000/screenshot \
 
 Screenshots are saved to the `screenshots/` directory at the project root.
 
+### `GET /screenshots/:filename`
+
+Serves a previously generated screenshot by filename.
+
+| Parameter | Type | Description |
+|---|---|---|
+| `filename` | `string` | The filename returned by `POST /screenshot` |
+
+**Example:**
+
+```bash
+curl http://localhost:3000/screenshots/1773247182920.png --output screenshot.png
+```
+
+Returns the PNG image file, or `404` if not found.
+
+**Typical workflow:**
+
+```bash
+# 1. Generate a screenshot
+RESPONSE=$(curl -s -X POST http://localhost:3000/screenshot \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://example.com"}')
+
+FILENAME=$(echo $RESPONSE | jq -r '.filename')
+
+# 2. Download the image
+curl http://localhost:3000/screenshots/$FILENAME --output screenshot.png
+```
+
 ## How login works
 
 When credentials are provided, Playwright:

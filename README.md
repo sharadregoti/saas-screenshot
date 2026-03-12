@@ -7,16 +7,59 @@ A self-hostable REST API that takes screenshots of SaaS UIs using Playwright. Su
 - **Node.js + TypeScript**
 - **Express** — HTTP server
 - **Playwright (Chromium)** — headless browser automation
+- **MCP SDK** — Model Context Protocol server
 
 ## Setup
 
 ```bash
 npm install
 npx playwright install chromium
+```
+
+### Start the REST API
+
+```bash
 npm start
 ```
 
 The server starts on port `3000` by default. Override with the `PORT` environment variable.
+
+### Start the MCP server
+
+```bash
+npm run start:mcp
+```
+
+The MCP server starts on port `3001` by default using the **Streamable HTTP** transport. Override with environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `MCP_TRANSPORT` | `http` | Transport mode: `http` or `stdio` |
+| `MCP_PORT` | `3001` | Port for HTTP transport |
+
+The MCP endpoint is available at `http://0.0.0.0:<MCP_PORT>/mcp`.
+
+**HTTP transport (default, for remote/internet access):**
+
+```bash
+npm run start:mcp
+# or explicitly:
+MCP_TRANSPORT=http MCP_PORT=3001 npm run start:mcp
+```
+
+**stdio transport (for local MCP clients that manage the process):**
+
+```bash
+MCP_TRANSPORT=stdio npm run start:mcp
+```
+
+#### MCP tool: `take_screenshot`
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `url` | `string` | Yes | The page URL to screenshot |
+| `username` | `string` | No | Username or email for login |
+| `password` | `string` | No | Password for login |
 
 ## API
 

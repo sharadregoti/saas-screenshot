@@ -6,9 +6,11 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "start:mcp": "ts-node src/mcp-server.ts",
+    "start:mcp:stdio": "MCP_TRANSPORT=stdio ts-node src/mcp-server.ts",
     "build": "tsc",
     "start:prod": "node dist/index.js",
-    "start:mcp:prod": "node dist/mcp-server.js"
+    "start:mcp:prod": "node dist/mcp-server.js",
+    "start:mcp:stdio:prod": "MCP_TRANSPORT=stdio node dist/mcp-server.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",

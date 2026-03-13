@@ -106,6 +106,32 @@ curl -X POST http://localhost:3000/screenshot \
 
 Screenshots are saved to the `screenshots/` directory at the project root.
 
+### `GET /screenshot`
+
+Takes a screenshot via query parameters — useful for quick testing in a browser.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `url` | `string` | Yes | The page URL to screenshot |
+| `username` | `string` | No | Username or email for login |
+| `password` | `string` | No | Password for login |
+
+**Example — no login:**
+
+```bash
+curl "http://localhost:3000/screenshot?url=https://example.com"
+```
+
+**Example — with login:**
+
+```bash
+curl "http://localhost:3000/screenshot?url=http://localhost:8080/admin/filters/new&username=abcd@gmail.com&password=1234"
+```
+
+**Response:** same as `POST /screenshot`.
+
+---
+
 ### `GET /screenshots/:filename`
 
 Serves a previously generated screenshot by filename.
